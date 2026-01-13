@@ -1,0 +1,19 @@
+# Visual Studio
+.vs/
+.vscode/
+*.user
+*.userosscache
+*.sln.docstates
+*.suo
+
+# Build results
+[Bb]in/
+[Oo]bj/
+
+# NuGet
+*.lock
+*.nupkg
+
+# Temporary files
+*.log
+*.tmp

@@ -1,0 +1,694 @@
+{
+  "Name": "MountFocus Replica",
+  "Width": 1140,
+  "Height": 840,
+  "WindowX": 770,
+  "WindowY": 180,
+  "Pages": [
+    {
+      "Name": "Main",
+      "Buttons": [
+        {
+          "Text": "0",
+          "Color": "#333333",
+          "Width": 90,
+          "Height": 70,
+          "X": 0,
+          "Y": 0,
+          "Action": "SendValue",
+          "Value": "0"
+        },
+        {
+          "Text": "1",
+          "Color": "#333333",
+          "Width": 90,
+          "Height": 70,
+          "X": 0,
+          "Y": 76,
+          "Action": "SendValue",
+          "Value": "1"
+        },
+        {
+          "Text": "2",
+          "Color": "#333333",
+          "Width": 90,
+          "Height": 70,
+          "X": 0,
+          "Y": 150,
+          "Action": "SendValue",
+          "Value": "2"
+        },
+        {
+          "Text": "3",
+          "Color": "#333333",
+          "Width": 90,
+          "Height": 70,
+          "X": 0,
+          "Y": 225,
+          "Action": "SendValue",
+          "Value": "3"
+        },
+        {
+          "Text": "4",
+          "Color": "#333333",
+          "Width": 90,
+          "Height": 70,
+          "X": 1,
+          "Y": 300,
+          "Action": "SendValue",
+          "Value": "4"
+        },
+        {
+          "Text": "5",
+          "Color": "#333333",
+          "Width": 90,
+          "Height": 70,
+          "X": 0,
+          "Y": 375,
+          "Action": "SendValue",
+          "Value": "5"
+        },
+        {
+          "Text": "6",
+          "Color": "#333333",
+          "Width": 90,
+          "Height": 70,
+          "X": 0,
+          "Y": 450,
+          "Action": "SendValue",
+          "Value": "6"
+        },
+        {
+          "Text": "7",
+          "Color": "#333333",
+          "Width": 90,
+          "Height": 70,
+          "X": 0,
+          "Y": 526,
+          "Action": "SendValue",
+          "Value": "7"
+        },
+        {
+          "Text": "8",
+          "Color": "#333333",
+          "Width": 90,
+          "Height": 70,
+          "X": 0,
+          "Y": 600,
+          "Action": "SendValue",
+          "Value": "8"
+        },
+        {
+          "Text": "9",
+          "Color": "#333333",
+          "Width": 90,
+          "Height": 70,
+          "X": 0,
+          "Y": 675,
+          "Action": "SendValue",
+          "Value": "9"
+        },
+        {
+          "Text": ".",
+          "Color": "#333333",
+          "Width": 90,
+          "Height": 70,
+          "X": 0,
+          "Y": 750,
+          "Action": "SendValue",
+          "Value": "."
+        },
+        {
+          "Text": "Bolillo\nOpen",
+          "Color": "#7f8c8d",
+          "Width": 150,
+          "Height": 80,
+          "X": 100,
+          "Y": 0,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Pan\nOpen",
+          "Color": "#7f8c8d",
+          "Width": 150,
+          "Height": 80,
+          "X": 255,
+          "Y": 0,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Relleno\nOpen",
+          "Color": "#7f8c8d",
+          "Width": 150,
+          "Height": 80,
+          "X": 410,
+          "Y": 0,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Galletas\nOpen",
+          "Color": "#7f8c8d",
+          "Width": 150,
+          "Height": 80,
+          "X": 565,
+          "Y": 0,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Pastel\nOpen",
+          "Color": "#7f8c8d",
+          "Width": 150,
+          "Height": 80,
+          "X": 720,
+          "Y": 0,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "3 Leches",
+          "Color": "#e67e22",
+          "Width": 150,
+          "Height": 80,
+          "X": 100,
+          "Y": 85,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Bolillo",
+          "Color": "#e67e22",
+          "Width": 150,
+          "Height": 80,
+          "X": 255,
+          "Y": 85,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Bolillo\nGrande",
+          "Color": "#e67e22",
+          "Width": 150,
+          "Height": 80,
+          "X": 410,
+          "Y": 85,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Bolillo\nEspecial",
+          "Color": "#e67e22",
+          "Width": 150,
+          "Height": 80,
+          "X": 565,
+          "Y": 85,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Conchas y\nSemas",
+          "Color": "#e67e22",
+          "Width": 150,
+          "Height": 80,
+          "X": 720,
+          "Y": 85,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Conchitas",
+          "Color": "#e67e22",
+          "Width": 150,
+          "Height": 80,
+          "X": 875,
+          "Y": 85,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Cheesecake",
+          "Color": "#e67e22",
+          "Width": 150,
+          "Height": 80,
+          "X": 100,
+          "Y": 170,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Chorreadas",
+          "Color": "#e67e22",
+          "Width": 150,
+          "Height": 80,
+          "X": 255,
+          "Y": 170,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Galletas\nBolsa",
+          "Color": "#e67e22",
+          "Width": 150,
+          "Height": 80,
+          "X": 410,
+          "Y": 170,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Ninos\nEnbueltos",
+          "Color": "#e67e22",
+          "Width": 150,
+          "Height": 80,
+          "X": 565,
+          "Y": 170,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Volteado\nPina",
+          "Color": "#e67e22",
+          "Width": 150,
+          "Height": 80,
+          "X": 720,
+          "Y": 170,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Pastel Mil\nHojas",
+          "Color": "#e67e22",
+          "Width": 150,
+          "Height": 80,
+          "X": 875,
+          "Y": 170,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Pan De\nMuerto",
+          "Color": "#e67e22",
+          "Width": 150,
+          "Height": 80,
+          "X": 100,
+          "Y": 255,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Pan",
+          "Color": "#e67e22",
+          "Width": 150,
+          "Height": 80,
+          "X": 255,
+          "Y": 255,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Capirotada",
+          "Color": "#e67e22",
+          "Width": 150,
+          "Height": 80,
+          "X": 410,
+          "Y": 255,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Rosca Reyes",
+          "Color": "#e67e22",
+          "Width": 150,
+          "Height": 80,
+          "X": 565,
+          "Y": 255,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Relleno",
+          "Color": "#e67e22",
+          "Width": 150,
+          "Height": 80,
+          "X": 720,
+          "Y": 255,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Relleno De\nChicharron",
+          "Color": "#e67e22",
+          "Width": 150,
+          "Height": 80,
+          "X": 875,
+          "Y": 255,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Panque\nChisp",
+          "Color": "#d35400",
+          "Width": 150,
+          "Height": 80,
+          "X": 100,
+          "Y": 340,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Panque\nGrande",
+          "Color": "#d35400",
+          "Width": 150,
+          "Height": 80,
+          "X": 255,
+          "Y": 340,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Bolsa Para\nTurkey",
+          "Color": "#d35400",
+          "Width": 150,
+          "Height": 80,
+          "X": 410,
+          "Y": 340,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Canasta\nTurkey",
+          "Color": "#d35400",
+          "Width": 150,
+          "Height": 80,
+          "X": 565,
+          "Y": 340,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Cafe\nSmall",
+          "Color": "#c0392b",
+          "Width": 150,
+          "Height": 80,
+          "X": 720,
+          "Y": 340,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Cafe\nLarge",
+          "Color": "#c0392b",
+          "Width": 150,
+          "Height": 80,
+          "X": 875,
+          "Y": 340,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Torta Fria\n2 Go",
+          "Color": "#f1c40f",
+          "Width": 150,
+          "Height": 80,
+          "X": 100,
+          "Y": 425,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Torta Pierna\n2 Go",
+          "Color": "#f1c40f",
+          "Width": 150,
+          "Height": 80,
+          "X": 255,
+          "Y": 425,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Torta\n2 Go",
+          "Color": "#f1c40f",
+          "Width": 150,
+          "Height": 80,
+          "X": 410,
+          "Y": 425,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Brkft Burrito\n2 Go",
+          "Color": "#f1c40f",
+          "Width": 150,
+          "Height": 80,
+          "X": 565,
+          "Y": 425,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Champurrado\nChocolate",
+          "Color": "#c0392b",
+          "Width": 150,
+          "Height": 80,
+          "X": 720,
+          "Y": 425,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Champurrado\nAvena",
+          "Color": "#c0392b",
+          "Width": 150,
+          "Height": 80,
+          "X": 875,
+          "Y": 425,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "X / @For",
+          "Color": "#2c3e50",
+          "Width": 150,
+          "Height": 80,
+          "X": 100,
+          "Y": 595,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Void\nItem",
+          "Color": "#2c3e50",
+          "Width": 150,
+          "Height": 80,
+          "X": 255,
+          "Y": 595,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Print\nReceipt",
+          "Color": "#2c3e50",
+          "Width": 150,
+          "Height": 80,
+          "X": 410,
+          "Y": 595,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Save\nPhone",
+          "Color": "#2c3e50",
+          "Width": 150,
+          "Height": 80,
+          "X": 565,
+          "Y": 595,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Recall\nPhone",
+          "Color": "#2c3e50",
+          "Width": 150,
+          "Height": 80,
+          "X": 720,
+          "Y": 595,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Open\nFood",
+          "Color": "#2c3e50",
+          "Width": 150,
+          "Height": 80,
+          "X": 875,
+          "Y": 595,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Functions",
+          "Color": "#2c3e50",
+          "Width": 150,
+          "Height": 80,
+          "X": 95,
+          "Y": 741,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Cancel\nTransct",
+          "Color": "#2c3e50",
+          "Width": 150,
+          "Height": 80,
+          "X": 251,
+          "Y": 739,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "No Sale",
+          "Color": "#2c3e50",
+          "Width": 150,
+          "Height": 80,
+          "X": 407,
+          "Y": 739,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Item\nInfo",
+          "Color": "#2c3e50",
+          "Width": 150,
+          "Height": 80,
+          "X": 561,
+          "Y": 738,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "QTY\nOverride",
+          "Color": "#2c3e50",
+          "Width": 150,
+          "Height": 80,
+          "X": 718,
+          "Y": 735,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Open\nMods",
+          "Color": "#2c3e50",
+          "Width": 150,
+          "Height": 80,
+          "X": 877,
+          "Y": 733,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Bakery",
+          "Color": "#e67e22",
+          "Width": 110,
+          "Height": 70,
+          "X": 1030,
+          "Y": 0,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Tacos /\nBurritos",
+          "Color": "#333333",
+          "Width": 110,
+          "Height": 70,
+          "X": 1030,
+          "Y": 75,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Tortas /\nDesayuno",
+          "Color": "#333333",
+          "Width": 110,
+          "Height": 70,
+          "X": 1030,
+          "Y": 150,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Platos /\nCombos",
+          "Color": "#333333",
+          "Width": 110,
+          "Height": 70,
+          "X": 1030,
+          "Y": 225,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Mariscos /\nCaldos",
+          "Color": "#333333",
+          "Width": 110,
+          "Height": 70,
+          "X": 1030,
+          "Y": 300,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "A La Cart /\nSides",
+          "Color": "#333333",
+          "Width": 110,
+          "Height": 70,
+          "X": 1030,
+          "Y": 375,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Tamales /\nFruta",
+          "Color": "#333333",
+          "Width": 110,
+          "Height": 70,
+          "X": 1030,
+          "Y": 450,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Por Libra /\nCatering",
+          "Color": "#333333",
+          "Width": 110,
+          "Height": 70,
+          "X": 1030,
+          "Y": 525,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "Drinks /\nLicuados",
+          "Color": "#333333",
+          "Width": 110,
+          "Height": 70,
+          "X": 1030,
+          "Y": 600,
+          "Action": "SendKey",
+          "Value": ""
+        },
+        {
+          "Text": "PAY",
+          "Color": "#27ae60",
+          "Width": 110,
+          "Height": 150,
+          "X": 1030,
+          "Y": 675,
+          "Action": "SendKey",
+          "Value": ""
+        }
+      ]
+    }
+  ]
+}

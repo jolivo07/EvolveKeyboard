@@ -1,0 +1,34 @@
+{
+  "Name": "New Keyboard",
+  "Width": 500,
+  "Height": 500,
+  "WindowX": 1420,
+  "WindowY": 580,
+  "Pages": [
+    {
+      "Name": "Main",
+      "Buttons": [
+        {
+          "Text": "12345",
+          "Color": "#DDDDDD",
+          "Width": 80,
+          "Height": 80,
+          "X": 4,
+          "Y": 3,
+          "Action": "SendValue",
+          "Value": "HolaMundo,ENTER"
+        },
+        {
+          "Text": "EXIT",
+          "Color": "#DDDDDD",
+          "Width": 80,
+          "Height": 80,
+          "X": 83,
+          "Y": 4,
+          "Action": "RunCommand",
+          "Value": "EXIT"
+        }
+      ]
+    }
+  ]
+}
