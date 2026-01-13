@@ -17,3 +17,6 @@
 # Temporary files
 *.log
 *.tmp
+
+# Trae
+.trae/
