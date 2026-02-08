@@ -45,6 +45,24 @@
                                 <TextBox Grid.Column="0" Text="{Binding Layout.Width, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Width" Margin="0,0,5,0"/>
                                 <TextBox Grid.Column="1" Text="{Binding Layout.Height, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Height" Margin="5,0,0,0"/>
                             </Grid>
+                            
+                            <Grid Margin="0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Grid.Column="0" Text="{Binding Layout.GridRows, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Grid Rows" Margin="0,0,5,0"/>
+                                <TextBox Grid.Column="1" Text="{Binding Layout.GridCols, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Grid Cols" Margin="5,0,0,0"/>
+                            </Grid>
+                             <Grid Margin="0,5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <CheckBox Grid.Column="0" IsChecked="{Binding Layout.GridEnabled, UpdateSourceTrigger=PropertyChanged}" Content="Grid Enabled" Margin="0,0,5,0"/>
+                                <CheckBox Grid.Column="1" IsChecked="{Binding Layout.GridVisible, UpdateSourceTrigger=PropertyChanged}" Content="Grid Visible" Margin="5,0,0,0"/>
+                            </Grid>
+
                              <Grid Margin="0,5">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -151,6 +169,16 @@
                         </ComboBox>
 
                         <TextBox Text="{Binding SelectedButton.Color, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Color (Hex)" Margin="0,5"/>
+                        <TextBox Text="{Binding SelectedButton.TextColor, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Text Color (Hex)" Margin="0,5"/>
+                        
+                        <Grid Margin="0,5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox Grid.Column="0" Text="{Binding SelectedButton.FontSize, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Font Size" Margin="0,0,5,0"/>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding SelectedButton.IsBold, UpdateSourceTrigger=PropertyChanged}" Content="Bold" Margin="5,0,0,0" VerticalAlignment="Center"/>
+                        </Grid>
                         
                         <Grid Margin="0,5">
                             <Grid.ColumnDefinitions>
@@ -261,7 +289,19 @@
                                                             </Style.Triggers>
                                                         </Style>
                                                     </Border.Style>
-                                                    <TextBlock Text="{Binding Text}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"/>
+                                                    <TextBlock Text="{Binding Text}" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center"
+                                                               FontSize="{Binding FontSize}"
+                                                               Foreground="{Binding TextColor}">
+                                                        <TextBlock.Style>
+                                                            <Style TargetType="TextBlock">
+                                                                <Style.Triggers>
+                                                                    <DataTrigger Binding="{Binding IsBold}" Value="True">
+                                                                        <Setter Property="FontWeight" Value="Bold"/>
+                                                                    </DataTrigger>
+                                                                </Style.Triggers>
+                                                            </Style>
+                                                        </TextBlock.Style>
+                                                    </TextBlock>
                                                 </Border>
                                                 
                                                 <!-- Resize Handle (Visible only if this button is the SelectedButton) -->

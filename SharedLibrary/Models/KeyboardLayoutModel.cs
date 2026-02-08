@@ -21,6 +21,18 @@ namespace SharedLibrary.Models
         private double windowY = 100;
 
         [ObservableProperty]
+        private int gridRows = 10;
+
+        [ObservableProperty]
+        private int gridCols = 10;
+
+        [ObservableProperty]
+        private bool gridEnabled = true;
+
+        [ObservableProperty]
+        private bool gridVisible = true;
+
+        [ObservableProperty]
         private ObservableCollection<KeyboardPageModel> pages = new();
     }
 }

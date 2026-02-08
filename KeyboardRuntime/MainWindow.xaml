@@ -73,10 +73,16 @@
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
                     <Button Width="{Binding Width}" Height="{Binding Height}"
-                            Content="{Binding Text}"
                             Command="{Binding DataContext.ExecuteButtonCommand, RelativeSource={RelativeSource AncestorType=Window}}"
                             CommandParameter="{Binding}"
-                            Focusable="False">
+                            Focusable="False"
+                            FontSize="{Binding FontSize}"
+                            Foreground="{Binding TextColor}">
+                            <TextBlock Text="{Binding Text}" 
+                                       TextWrapping="Wrap" 
+                                       TextAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"/>
                             <Button.Style>
                                 <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                                     <Setter Property="Background" Value="{Binding Color}"/>
@@ -84,6 +90,9 @@
                                     <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="10"/>
                                     <Setter Property="Margin" Value="2"/>
                                     <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsBold}" Value="True">
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                        </DataTrigger>
                                         <Trigger Property="IsPressed" Value="True">
                                             <Setter Property="Opacity" Value="0.7"/>
                                         </Trigger>

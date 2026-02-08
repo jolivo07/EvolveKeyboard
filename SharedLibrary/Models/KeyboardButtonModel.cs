@@ -11,6 +11,15 @@ namespace SharedLibrary.Models
         private string color = "#DDDDDD";
 
         [ObservableProperty]
+        private string textColor = "#000000";
+
+        [ObservableProperty]
+        private double fontSize = 14;
+
+        [ObservableProperty]
+        private bool isBold = false;
+
+        [ObservableProperty]
         private double width = 60;
 
         [ObservableProperty]
