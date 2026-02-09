@@ -1,9 +1,9 @@
 {
   "Name": "New Keyboard",
-  "Width": 500,
+  "Width": 506,
   "Height": 500,
-  "WindowX": 1420,
-  "WindowY": 580,
+  "WindowX": 16.92307692307682,
+  "WindowY": 565.230769230769,
   "Pages": [
     {
       "Name": "Main",
@@ -13,9 +13,9 @@
           "Color": "#DDDDDD",
           "Width": 80,
           "Height": 80,
-          "X": 4,
-          "Y": 3,
-          "Action": "SendValue",
+          "X": 19,
+          "Y": 24,
+          "Action": "Navigate",
           "Value": "HolaMundo,ENTER"
         },
         {
@@ -23,12 +23,26 @@
           "Color": "#DDDDDD",
           "Width": 80,
           "Height": 80,
-          "X": 83,
-          "Y": 4,
+          "X": 132,
+          "Y": 31,
           "Action": "RunCommand",
           "Value": "EXIT"
+        },
+        {
+          "Text": "Boton2",
+          "Color": "#DDDDDD",
+          "Width": 80,
+          "Height": 50,
+          "X": 19,
+          "Y": 135,
+          "Action": "SendKey",
+          "Value": ""
         }
       ]
+    },
+    {
+      "Name": "Page 2",
+      "Buttons": []
     }
   ]
 }

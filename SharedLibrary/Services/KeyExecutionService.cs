@@ -5,6 +5,8 @@ using System.Diagnostics;
 using System.Linq;
 using WindowsInput;
 using WindowsInput.Native;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace SharedLibrary.Services
 {
@@ -24,62 +26,123 @@ namespace SharedLibrary.Services
         {
             if (button == null) return;
 
-            switch (button.Action)
+            try 
             {
-                case "RunCommand":
-                    RunCommand(button.Value);
-                    break;
-                case "SendValue":
-                    if (!string.IsNullOrEmpty(button.Value))
-                    {
-                        // Check if the value ends with a command (e.g., "12345,ENTER")
-                        int lastCommaIndex = button.Value.LastIndexOf(',');
-                        bool handled = false;
-
-                        if (lastCommaIndex >= 0 && lastCommaIndex < button.Value.Length - 1)
+                switch (button.Action)
+                {
+                    case "RunCommand":
+                        RunCommand(button.Value);
+                        break;
+                    case "MultiFunction":
+                        ExecuteMultiFunction(button.Value);
+                        break;
+                    case "SendValue":
+                        ExecuteSendValue(button.Value);
+                        break;
+                    case "Navigate":
+                        if (!string.IsNullOrEmpty(button.Value))
                         {
-                            string textPart = button.Value.Substring(0, lastCommaIndex);
-                            string commandPart = button.Value.Substring(lastCommaIndex + 1).Trim();
-
-                            // Verify if the part after the comma is a valid key or combination
-                            if (IsValidKeyCombination(commandPart))
-                            {
-                                // Type the text part first
-                                if (!string.IsNullOrEmpty(textPart))
-                                {
-                                    _inputSimulator.Keyboard.TextEntry(textPart);
-                                }
-                                
-                                // Small delay between text and command
-                                System.Threading.Thread.Sleep(50);
-
-                                // Execute the command part
-                                SendKey(commandPart);
-                                handled = true;
-                            }
+                            CommandRequested?.Invoke(this, $"Navigate:{button.Value}");
                         }
-
-                        if (!handled)
-                        {
-                            _inputSimulator.Keyboard.TextEntry(button.Value);
-                        }
-                    }
-                    break;
-                case "Navigate":
-                    if (!string.IsNullOrEmpty(button.Value))
-                    {
-                        CommandRequested?.Invoke(this, $"Navigate:{button.Value}");
-                    }
-                    break;
-                case "CommandKey":
-                    SendKey(button.Value);
-                    break;
-                // Keep SendKey for backward compatibility if needed, mapping to CommandKey logic
-                case "SendKey":
-                    SendKey(button.Value);
-                    break;
+                        break;
+                    case "CommandKey":
+                        SendKey(button.Value);
+                        break;
+                    // Keep SendKey for backward compatibility if needed, mapping to CommandKey logic
+                    case "SendKey":
+                        SendKey(button.Value);
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error executing action: {ex.Message}");
             }
         }
+
+        private void ExecuteSendValue(string value)
+        {
+            if (string.IsNullOrEmpty(value)) return;
+
+            // Check if the value ends with a command (e.g., "12345,ENTER")
+            int lastCommaIndex = value.LastIndexOf(',');
+            bool handled = false;
+
+            if (lastCommaIndex >= 0 && lastCommaIndex < value.Length - 1)
+            {
+                string textPart = value.Substring(0, lastCommaIndex);
+                string commandPart = value.Substring(lastCommaIndex + 1).Trim();
+
+                // Verify if the part after the comma is a valid key or combination
+                if (IsValidKeyCombination(commandPart))
+                {
+                    // Type the text part first
+                    if (!string.IsNullOrEmpty(textPart))
+                    {
+                        _inputSimulator.Keyboard.TextEntry(textPart);
+                    }
+                    
+                    // Small delay between text and command
+                    System.Threading.Thread.Sleep(50);
+
+                    // Execute the command part
+                    SendKey(commandPart);
+                    handled = true;
+                }
+            }
+
+            if (!handled)
+            {
+                _inputSimulator.Keyboard.TextEntry(value);
+            }
+        }
+
+        private void ExecuteMultiFunction(string jsonValue)
+        {
+            if (string.IsNullOrWhiteSpace(jsonValue)) return;
+
+            try
+            {
+                var actions = JsonSerializer.Deserialize<List<MultiFunctionItem>>(jsonValue);
+                if (actions == null) return;
+
+                foreach (var action in actions)
+                {
+                    Debug.WriteLine($"Executing MultiFunction Action: {action.Action} -> {action.Value}");
+
+                    switch (action.Action)
+                    {
+                        case "SendValue":
+                            ExecuteSendValue(action.Value);
+                            break;
+                        case "CommandKey":
+                            SendKey(action.Value);
+                            break;
+                        case "Navigate":
+                            if (!string.IsNullOrEmpty(action.Value))
+                            {
+                                CommandRequested?.Invoke(this, $"Navigate:{action.Value}");
+                            }
+                            break;
+                        case "RunCommand":
+                            RunCommand(action.Value); 
+                            break;
+                        default:
+                            Debug.WriteLine($"Unknown MultiFunction Action: {action.Action}");
+                            break;
+                    }
+                }
+            }
+            catch (JsonException jex)
+            {
+                Debug.WriteLine($"Invalid JSON in MultiFunction: {jex.Message}");
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error executing MultiFunction: {ex.Message}");
+            }
+        }
+
 
         private bool IsValidKeyCombination(string value)
         {
@@ -248,4 +311,11 @@ namespace SharedLibrary.Services
             }
         }
     }
+
+    public class MultiFunctionItem
+    {
+        public string Action { get; set; } = "";
+        public string Value { get; set; } = "";
+    }
 }
+

@@ -134,10 +134,6 @@ namespace KeyboardRuntime.ViewModels
                     CurrentPage = Layout.Pages.LastOrDefault(); // Loop back
                 }
             }
-            else if (command == "open_cash_drawer")
-            {
-                MessageBox.Show("Cash Drawer Opened!", "Virtual Keyboard Runtime", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
         }
 
         [RelayCommand]

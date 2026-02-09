@@ -166,6 +166,7 @@
                              <ComboBoxItem Content="SendValue"/>
                              <ComboBoxItem Content="CommandKey"/>
                              <ComboBoxItem Content="Navigate"/>
+                             <ComboBoxItem Content="MultiFunction"/>
                         </ComboBox>
 
                         <TextBox Text="{Binding SelectedButton.Color, UpdateSourceTrigger=PropertyChanged}" materialDesign:HintAssist.Hint="Color (Hex)" Margin="0,5"/>

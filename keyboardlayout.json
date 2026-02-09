@@ -125,8 +125,8 @@
           "Height": 80,
           "X": 100,
           "Y": 0,
-          "Action": "SendKey",
-          "Value": ""
+          "Action": "SendValue",
+          "Value": "0123456789,ENTER"
         },
         {
           "Text": "Pan\nOpen",
@@ -135,8 +135,8 @@
           "Height": 80,
           "X": 255,
           "Y": 0,
-          "Action": "SendKey",
-          "Value": ""
+          "Action": "CommandKey",
+          "Value": "ALT\u002BF4"
         },
         {
           "Text": "Relleno\nOpen",
@@ -163,7 +163,7 @@
           "Color": "#7f8c8d",
           "Width": 150,
           "Height": 80,
-          "X": 720,
+          "X": 719,
           "Y": 0,
           "Action": "SendKey",
           "Value": ""
@@ -233,7 +233,7 @@
           "Color": "#e67e22",
           "Width": 150,
           "Height": 80,
-          "X": 100,
+          "X": 101,
           "Y": 170,
           "Action": "SendKey",
           "Value": ""
@@ -687,8 +687,22 @@
           "Y": 675,
           "Action": "SendKey",
           "Value": ""
+        },
+        {
+          "Text": "TEST",
+          "Color": "#7f8c8d",
+          "Width": 150,
+          "Height": 80,
+          "X": 873,
+          "Y": 0,
+          "Action": "RunCommand",
+          "Value": "notepad"
         }
       ]
+    },
+    {
+      "Name": "Page 2",
+      "Buttons": []
     }
   ]
 }
