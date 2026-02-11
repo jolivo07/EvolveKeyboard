@@ -16,11 +16,11 @@
         WindowStartupLocation="Manual"
         WindowStyle="None"  
         ResizeMode="NoResize" 
+        ShowInTaskbar="False"
         AllowsTransparency="True" 
-        Background="#333333">
+        Background="{Binding Layout.BackgroundColor, FallbackValue=#333333}">
     
-    <!-- DataContext set in Code Behind -->
-
+    <!-- DataContext set in Code Behind - Forcing Rebuild -->
     <Grid MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <!-- Load Button (Visible when Layout is null) -->
         <Button Content="LOAD KEYBOARD"
@@ -86,7 +86,8 @@
                             <Button.Style>
                                 <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
                                     <Setter Property="Background" Value="{Binding Color}"/>
-                                    <Setter Property="BorderThickness" Value="0"/>
+                                    <Setter Property="BorderBrush" Value="{Binding BorderColor}"/>
+                                    <Setter Property="BorderThickness" Value="2"/>
                                     <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="10"/>
                                     <Setter Property="Margin" Value="2"/>
                                     <Style.Triggers>

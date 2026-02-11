@@ -33,6 +33,9 @@ namespace SharedLibrary.Models
         private bool gridVisible = true;
 
         [ObservableProperty]
+        private string backgroundColor = "#333333";
+
+        [ObservableProperty]
         private ObservableCollection<KeyboardPageModel> pages = new();
     }
 }

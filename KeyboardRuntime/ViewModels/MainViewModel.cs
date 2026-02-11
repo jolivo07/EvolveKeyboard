@@ -97,7 +97,7 @@ namespace KeyboardRuntime.ViewModels
 
             if (command.Equals("EXIT", StringComparison.OrdinalIgnoreCase))
             {
-                Application.Current.Shutdown();
+                System.Windows.Application.Current.Shutdown();
                 return;
             }
 
@@ -139,7 +139,7 @@ namespace KeyboardRuntime.ViewModels
         [RelayCommand]
         private async Task LoadLayout()
         {
-            var dialog = new OpenFileDialog
+            var dialog = new Microsoft.Win32.OpenFileDialog
             {
                 Filter = "JSON Files (*.json)|*.json"
             };
