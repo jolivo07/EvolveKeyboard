@@ -16,6 +16,7 @@
         WindowStartupLocation="Manual"
         WindowStyle="None"  
         ResizeMode="NoResize" 
+        ShowActivated="False"
         ShowInTaskbar="False"
         AllowsTransparency="True" 
         Background="{Binding Layout.BackgroundColor, FallbackValue=#333333}">

@@ -14,11 +14,20 @@ namespace KeyboardRuntime
         private MainViewModel _viewModel;
         private System.Windows.Forms.NotifyIcon? _notifyIcon;
 
+        private static readonly IntPtr HWND_TOPMOST = new IntPtr(-1);
+        private const uint SWP_NOSIZE = 0x0001;
+        private const uint SWP_NOMOVE = 0x0002;
+        private const uint SWP_NOACTIVATE = 0x0010;
+        private const uint SWP_SHOWWINDOW = 0x0040;
+
         [DllImport("user32.dll")]
         public static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
         [DllImport("user32.dll")]
         public static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll")]
+        private static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int x, int y, int cx, int cy, uint uFlags);
 
         public MainWindow()
         {
@@ -37,6 +46,20 @@ namespace KeyboardRuntime
             Closed += MainWindow_Closed;
         }
 
+        private void ShowNoActivate()
+        {
+            if (!IsVisible)
+            {
+                Show();
+            }
+
+            var helper = new WindowInteropHelper(this);
+            if (helper.Handle != IntPtr.Zero)
+            {
+                SetWindowPos(helper.Handle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE | SWP_SHOWWINDOW);
+            }
+        }
+
         private void InitializeNotifyIcon()
         {
             _notifyIcon = new System.Windows.Forms.NotifyIcon();
@@ -47,18 +70,16 @@ namespace KeyboardRuntime
             // Double click to show/bring to front
             _notifyIcon.DoubleClick += (s, args) => 
             {
-                this.Show();
-                this.WindowState = WindowState.Normal;
-                this.Activate();
+                WindowState = WindowState.Normal;
+                ShowNoActivate();
             };
 
             // Context menu
             var contextMenu = new System.Windows.Forms.ContextMenuStrip();
             contextMenu.Items.Add("Show Keyboard", null, (s, args) => 
             {
-                this.Show();
-                this.WindowState = WindowState.Normal;
-                this.Activate();
+                WindowState = WindowState.Normal;
+                ShowNoActivate();
             });
             contextMenu.Items.Add("-"); // Separator
             contextMenu.Items.Add("Exit", null, (s, args) => Close());
@@ -94,8 +115,8 @@ namespace KeyboardRuntime
             finally
             {
                 // Ensure window becomes visible regardless of load success/failure
-                this.Opacity = 1;
-                this.Activate(); // Bring to foreground
+                Opacity = 1;
+                ShowNoActivate();
             }
         }
 
