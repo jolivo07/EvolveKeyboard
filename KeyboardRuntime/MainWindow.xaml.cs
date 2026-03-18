@@ -12,7 +12,7 @@ namespace KeyboardRuntime
         private const int GWL_EXSTYLE = -20;
         private const int WS_EX_NOACTIVATE = 0x08000000;
         private MainViewModel _viewModel;
-        private System.Windows.Forms.NotifyIcon _notifyIcon;
+        private System.Windows.Forms.NotifyIcon? _notifyIcon;
 
         [DllImport("user32.dll")]
         public static extern IntPtr SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
@@ -40,7 +40,6 @@ namespace KeyboardRuntime
         private void InitializeNotifyIcon()
         {
             _notifyIcon = new System.Windows.Forms.NotifyIcon();
-            // Use system application icon as default
             _notifyIcon.Icon = System.Drawing.SystemIcons.Application; 
             _notifyIcon.Visible = true;
             _notifyIcon.Text = "Evolve Keyboard Runtime";
@@ -71,6 +70,7 @@ namespace KeyboardRuntime
         {
             if (_notifyIcon != null)
             {
+                _notifyIcon.Visible = false;
                 _notifyIcon.Dispose();
                 _notifyIcon = null;
             }

@@ -35,23 +35,27 @@ namespace KeyboardRuntime.ViewModels
             {
                 var baseDir = AppContext.BaseDirectory;
                 var currentDir = Environment.CurrentDirectory;
-                var candidates = new[]
+                string? FindLayoutPath(string fileName)
                 {
-                    Path.Combine(baseDir, "EvolveKeyboard.json"),
-                    Path.Combine(baseDir, "Layouts", "EvolveKeyboard.json"),
-                    Path.Combine(currentDir, "EvolveKeyboard.json"),
-                    Path.Combine(currentDir, "Layouts", "EvolveKeyboard.json"),
-                    Path.Combine(baseDir, "keyboardlayout.json"),           // fallback common name
-                    Path.Combine(baseDir, "MountFocusLayout.json")          // for dev/testing
-                };
+                    var candidates = new[]
+                    {
+                        Path.Combine(baseDir, fileName),
+                        Path.Combine(baseDir, "Layouts", fileName),
+                        Path.Combine(currentDir, fileName),
+                        Path.Combine(currentDir, "Layouts", fileName)
+                    };
 
-                string? found = candidates.FirstOrDefault(File.Exists);
+                    var found = candidates.FirstOrDefault(File.Exists);
 
-                if (found == null)
-                {
-                    var recursive = Directory.EnumerateFiles(baseDir, "EvolveKeyboard.json", SearchOption.AllDirectories).FirstOrDefault();
-                    found = recursive;
+                    if (found == null)
+                    {
+                        found = Directory.EnumerateFiles(baseDir, fileName, SearchOption.AllDirectories).FirstOrDefault();
+                    }
+
+                    return found;
                 }
+
+                var found = FindLayoutPath("EvolveKeyboard.json") ?? FindLayoutPath("EvolveKeyboardDefault.json");
 
                 if (found != null)
                 {
