@@ -35,15 +35,32 @@ namespace KeyboardRuntime.ViewModels
             {
                 var baseDir = AppContext.BaseDirectory;
                 var currentDir = Environment.CurrentDirectory;
+                var programDataDir = Path.Combine(
+                    Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData),
+                    "EvolveApps",
+                    "EvolveKeyboard"
+                );
                 string? FindLayoutPath(string fileName)
                 {
-                    var candidates = new[]
-                    {
-                        Path.Combine(baseDir, fileName),
-                        Path.Combine(baseDir, "Layouts", fileName),
-                        Path.Combine(currentDir, fileName),
-                        Path.Combine(currentDir, "Layouts", fileName)
-                    };
+                    var hasProgramDataLayouts = Directory.Exists(programDataDir);
+
+                    var candidates = hasProgramDataLayouts
+                        ? new[]
+                        {
+                            Path.Combine(programDataDir, fileName),
+                            Path.Combine(programDataDir, "Layouts", fileName),
+                            Path.Combine(baseDir, fileName),
+                            Path.Combine(baseDir, "Layouts", fileName),
+                            Path.Combine(currentDir, fileName),
+                            Path.Combine(currentDir, "Layouts", fileName)
+                        }
+                        : new[]
+                        {
+                            Path.Combine(baseDir, fileName),
+                            Path.Combine(baseDir, "Layouts", fileName),
+                            Path.Combine(currentDir, fileName),
+                            Path.Combine(currentDir, "Layouts", fileName)
+                        };
 
                     var found = candidates.FirstOrDefault(File.Exists);
 
