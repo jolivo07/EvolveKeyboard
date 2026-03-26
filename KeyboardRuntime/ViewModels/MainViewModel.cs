@@ -29,6 +29,11 @@ namespace KeyboardRuntime.ViewModels
             // Auto-load logic moved to explicit method to control visibility
         }
 
+        private static async Task<KeyboardLayoutModel?> LoadLayoutFastAsync(string filePath)
+        {
+            return await Task.Run(() => LayoutSerializer.LoadAsync(filePath));
+        }
+
         public async Task TryAutoLoadNearbyAsync()
         {
             try
@@ -76,7 +81,7 @@ namespace KeyboardRuntime.ViewModels
 
                 if (found != null)
                 {
-                    var loaded = await LayoutSerializer.LoadAsync(found);
+                    var loaded = await LoadLayoutFastAsync(found);
                     if (loaded != null)
                     {
                         Layout = loaded;
@@ -167,7 +172,7 @@ namespace KeyboardRuntime.ViewModels
 
             if (dialog.ShowDialog() == true)
             {
-                var loaded = await LayoutSerializer.LoadAsync(dialog.FileName);
+                var loaded = await LoadLayoutFastAsync(dialog.FileName);
                 if (loaded != null)
                 {
                     Layout = loaded;

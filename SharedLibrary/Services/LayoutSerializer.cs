@@ -24,7 +24,12 @@ namespace SharedLibrary.Services
         public static async Task<KeyboardLayoutModel?> LoadAsync(string filePath)
         {
             if (!File.Exists(filePath)) return null;
-            using var stream = File.OpenRead(filePath);
+            using var stream = new FileStream(
+                filePath,
+                FileMode.Open,
+                FileAccess.Read,
+                FileShare.ReadWrite | FileShare.Delete
+            );
             return await JsonSerializer.DeserializeAsync<KeyboardLayoutModel>(stream, _options);
         }
 

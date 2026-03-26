@@ -18,6 +18,8 @@
         ResizeMode="NoResize" 
         ShowActivated="False"
         ShowInTaskbar="False"
+        UseLayoutRounding="True"
+        SnapsToDevicePixels="True"
         AllowsTransparency="True" 
         Background="{Binding Layout.BackgroundColor, FallbackValue=#333333}">
     
@@ -49,7 +51,9 @@
         </Button>
 
         <!-- Keyboard Area (Visible when Layout is NOT null) -->
-        <ItemsControl ItemsSource="{Binding CurrentPage.Buttons}">
+        <ItemsControl ItemsSource="{Binding CurrentPage.Buttons}"
+                      Width="{Binding Layout.Width, FallbackValue=1000}"
+                      Height="{Binding Layout.Height, FallbackValue=600}">
             <ItemsControl.Style>
                 <Style TargetType="ItemsControl">
                     <Setter Property="Visibility" Value="Visible"/>
@@ -62,7 +66,7 @@
             </ItemsControl.Style>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Canvas/>
+                    <Canvas ClipToBounds="True"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemContainerStyle>
@@ -90,7 +94,7 @@
                                     <Setter Property="BorderBrush" Value="{Binding BorderColor}"/>
                                     <Setter Property="BorderThickness" Value="2"/>
                                     <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="10"/>
-                                    <Setter Property="Margin" Value="2"/>
+                                    <Setter Property="Margin" Value="0"/>
                                     <Style.Triggers>
                                         <DataTrigger Binding="{Binding IsBold}" Value="True">
                                             <Setter Property="FontWeight" Value="Bold"/>
