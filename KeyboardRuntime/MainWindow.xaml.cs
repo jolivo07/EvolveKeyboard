@@ -1,9 +1,11 @@
 using KeyboardRuntime.ViewModels;
 using System;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
+using System.Windows.Media;
 
 namespace KeyboardRuntime
 {
@@ -35,19 +37,41 @@ namespace KeyboardRuntime
             _viewModel = new MainViewModel();
             _viewModel.PropertyChanged += ViewModel_PropertyChanged;
             DataContext = _viewModel;
-            
-            // Start invisible to avoid flickering
-            this.Opacity = 0;
 
             InitializeNotifyIcon();
 
-            // Auto-load layout before showing window
-            Loaded += MainWindow_Loaded;
             Closed += MainWindow_Closed;
+        }
+
+        public async Task InitializeAsync()
+        {
+            try
+            {
+                await _viewModel.TryAutoLoadNearbyAsync();
+
+                if (_viewModel.Layout != null)
+                {
+                    Left = _viewModel.Layout.WindowX;
+                    Top = _viewModel.Layout.WindowY;
+                    Width = _viewModel.Layout.Width;
+                    Height = _viewModel.Layout.Height;
+                    ClampToCurrentScreenWorkArea();
+                }
+            }
+            finally
+            {
+                Opacity = 1;
+                ShowNoActivate();
+            }
         }
 
         private void ShowNoActivate()
         {
+            if (WindowState == WindowState.Minimized)
+            {
+                WindowState = WindowState.Normal;
+            }
+
             if (!IsVisible)
             {
                 Show();
@@ -58,6 +82,39 @@ namespace KeyboardRuntime
             {
                 SetWindowPos(helper.Handle, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE | SWP_SHOWWINDOW);
             }
+        }
+
+        private void ClampToCurrentScreenWorkArea()
+        {
+            var dpi = VisualTreeHelper.GetDpi(this);
+
+            var topLeftPx = new System.Drawing.Point(
+                (int)Math.Round(Left * dpi.DpiScaleX),
+                (int)Math.Round(Top * dpi.DpiScaleY)
+            );
+
+            var screen = System.Windows.Forms.Screen.FromPoint(topLeftPx);
+            var waPx = screen.WorkingArea;
+
+            var waLeft = waPx.Left / dpi.DpiScaleX;
+            var waTop = waPx.Top / dpi.DpiScaleY;
+            var waRight = (waPx.Left + waPx.Width) / dpi.DpiScaleX;
+            var waBottom = (waPx.Top + waPx.Height) / dpi.DpiScaleY;
+
+            var newLeft = Left;
+            var newTop = Top;
+
+            if (newLeft < waLeft) newLeft = waLeft;
+            if (newTop < waTop) newTop = waTop;
+
+            if (newLeft + Width > waRight) newLeft = waRight - Width;
+            if (newTop + Height > waBottom) newTop = waBottom - Height;
+
+            if (newLeft < waLeft) newLeft = waLeft;
+            if (newTop < waTop) newTop = waTop;
+
+            Left = newLeft;
+            Top = newTop;
         }
 
         private void InitializeNotifyIcon()
@@ -97,29 +154,6 @@ namespace KeyboardRuntime
             }
         }
 
-        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                await _viewModel.TryAutoLoadNearbyAsync();
-                
-                // Force position update after layout load and before showing
-                if (_viewModel.Layout != null)
-                {
-                    this.Left = _viewModel.Layout.WindowX;
-                    this.Top = _viewModel.Layout.WindowY;
-                    this.Width = _viewModel.Layout.Width;
-                    this.Height = _viewModel.Layout.Height;
-                }
-            }
-            finally
-            {
-                // Ensure window becomes visible regardless of load success/failure
-                Opacity = 1;
-                ShowNoActivate();
-            }
-        }
-
         private void ViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             if (e.PropertyName == nameof(MainViewModel.Layout) && _viewModel.Layout != null)
@@ -130,6 +164,7 @@ namespace KeyboardRuntime
                 this.Top = _viewModel.Layout.WindowY;
                 this.Width = _viewModel.Layout.Width;
                 this.Height = _viewModel.Layout.Height;
+                ClampToCurrentScreenWorkArea();
             }
         }
 

@@ -22,6 +22,43 @@
         SnapsToDevicePixels="True"
         AllowsTransparency="True" 
         Background="{Binding Layout.BackgroundColor, FallbackValue=#333333}">
+
+    <Window.Resources>
+        <Style x:Key="KeyboardKeyButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="{Binding Color}"/>
+            <Setter Property="BorderBrush" Value="{Binding BorderColor}"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="RootBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="10"
+                                SnapsToDevicePixels="True">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="RootBorder" Property="Opacity" Value="0.7"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding IsBold}" Value="True">
+                    <Setter Property="FontWeight" Value="Bold"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     
     <!-- DataContext set in Code Behind - Forcing Rebuild -->
     <Grid MouseLeftButtonDown="Border_MouseLeftButtonDown">
@@ -82,29 +119,13 @@
                             CommandParameter="{Binding}"
                             Focusable="False"
                             FontSize="{Binding FontSize}"
-                            Foreground="{Binding TextColor}">
+                            Foreground="{Binding TextColor}"
+                            Style="{StaticResource KeyboardKeyButtonStyle}">
                             <TextBlock Text="{Binding Text}" 
                                        TextWrapping="Wrap" 
                                        TextAlignment="Center"
                                        HorizontalAlignment="Center"
                                        VerticalAlignment="Center"/>
-                            <Button.Style>
-                                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedButton}">
-                                    <Setter Property="Background" Value="{Binding Color}"/>
-                                    <Setter Property="BorderBrush" Value="{Binding BorderColor}"/>
-                                    <Setter Property="BorderThickness" Value="2"/>
-                                    <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="10"/>
-                                    <Setter Property="Margin" Value="0"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsBold}" Value="True">
-                                            <Setter Property="FontWeight" Value="Bold"/>
-                                        </DataTrigger>
-                                        <Trigger Property="IsPressed" Value="True">
-                                            <Setter Property="Opacity" Value="0.7"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
                     </Button>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>

@@ -15,6 +15,15 @@ public partial class App : System.Windows.Application
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
         }
 
+        protected override async void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            var window = new MainWindow();
+            MainWindow = window;
+            await window.InitializeAsync();
+        }
+
         private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
             System.Windows.MessageBox.Show($"UNHANDLED DISPATCHER EXCEPTION:\n\n{e.Exception.Message}\n\nStack Trace:\n{e.Exception.StackTrace}", 
@@ -33,4 +42,3 @@ public partial class App : System.Windows.Application
                             MessageBoxImage.Error);
         }
     }
-
