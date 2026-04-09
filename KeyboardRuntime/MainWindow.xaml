@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KeyboardRuntime"
+        xmlns:controls="clr-namespace:KeyboardRuntime.Controls"
         xmlns:vm="clr-namespace:KeyboardRuntime.ViewModels"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
@@ -23,43 +24,6 @@
         AllowsTransparency="True" 
         Background="{Binding Layout.BackgroundColor, FallbackValue=#333333}">
 
-    <Window.Resources>
-        <Style x:Key="KeyboardKeyButtonStyle" TargetType="Button">
-            <Setter Property="Background" Value="{Binding Color}"/>
-            <Setter Property="BorderBrush" Value="{Binding BorderColor}"/>
-            <Setter Property="BorderThickness" Value="2"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Button">
-                        <Border x:Name="RootBorder"
-                                Background="{TemplateBinding Background}"
-                                BorderBrush="{TemplateBinding BorderBrush}"
-                                BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="10"
-                                SnapsToDevicePixels="True">
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsPressed" Value="True">
-                                <Setter TargetName="RootBorder" Property="Opacity" Value="0.7"/>
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <DataTrigger Binding="{Binding IsBold}" Value="True">
-                    <Setter Property="FontWeight" Value="Bold"/>
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
-    </Window.Resources>
-    
     <!-- DataContext set in Code Behind - Forcing Rebuild -->
     <Grid MouseLeftButtonDown="Border_MouseLeftButtonDown">
         <!-- Load Button (Visible when Layout is null) -->
@@ -88,11 +52,12 @@
         </Button>
 
         <!-- Keyboard Area (Visible when Layout is NOT null) -->
-        <ItemsControl ItemsSource="{Binding CurrentPage.Buttons}"
-                      Width="{Binding Layout.Width, FallbackValue=1000}"
-                      Height="{Binding Layout.Height, FallbackValue=600}">
-            <ItemsControl.Style>
-                <Style TargetType="ItemsControl">
+        <controls:KeyboardCanvas Width="{Binding Layout.Width, FallbackValue=1000}"
+                                 Height="{Binding Layout.Height, FallbackValue=600}"
+                                 Buttons="{Binding CurrentPage.Buttons}"
+                                 Command="{Binding ExecuteButtonCommand}">
+            <controls:KeyboardCanvas.Style>
+                <Style TargetType="{x:Type controls:KeyboardCanvas}">
                     <Setter Property="Visibility" Value="Visible"/>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding Layout}" Value="{x:Null}">
@@ -100,35 +65,7 @@
                         </DataTrigger>
                     </Style.Triggers>
                 </Style>
-            </ItemsControl.Style>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Canvas ClipToBounds="True"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemContainerStyle>
-                <Style TargetType="ContentPresenter">
-                    <Setter Property="Canvas.Left" Value="{Binding X}"/>
-                    <Setter Property="Canvas.Top" Value="{Binding Y}"/>
-                </Style>
-            </ItemsControl.ItemContainerStyle>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Button Width="{Binding Width}" Height="{Binding Height}"
-                            Command="{Binding DataContext.ExecuteButtonCommand, RelativeSource={RelativeSource AncestorType=Window}}"
-                            CommandParameter="{Binding}"
-                            Focusable="False"
-                            FontSize="{Binding FontSize}"
-                            Foreground="{Binding TextColor}"
-                            Style="{StaticResource KeyboardKeyButtonStyle}">
-                            <TextBlock Text="{Binding Text}" 
-                                       TextWrapping="Wrap" 
-                                       TextAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       VerticalAlignment="Center"/>
-                    </Button>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+            </controls:KeyboardCanvas.Style>
+        </controls:KeyboardCanvas>
     </Grid>
 </Window>
